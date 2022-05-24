@@ -4,7 +4,6 @@ metadata:
   name: nginx-app1
 spec:
   destination:
-    name: ''
     namespace: nginx-argocd
     server: 'https://kubernetes.default.svc'
   source:
