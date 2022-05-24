@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-app1
+spec:
+  destination:
+    name: ''
+    namespace: nginx-argocd
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: apps/nginx
+    repoURL: 'https://github.com/UnixArena/gitops-argocd.git'
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+        - dev-uacls1/nginx.yaml
+  project: default
+  syncPolicy:
+    automated: null
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - PruneLast=true
